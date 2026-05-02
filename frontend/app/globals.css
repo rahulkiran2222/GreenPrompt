@@ -1,0 +1,25 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root { --bg: 2 6 23; }
+html, body { background: rgb(var(--bg)); color: #e2e8f0; }
+.light html, html.light, html.light body {
+  --bg: 240 253 244; color: #0f172a;
+}
+
+.glass {
+  @apply backdrop-blur-md bg-white/5 border border-white/10 rounded-2xl;
+}
+.light .glass { @apply bg-white/60 border-emerald-200/60; }
+
+.gradient-text {
+  background: linear-gradient(90deg,#34d399,#3b82f6,#34d399);
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradient-x 8s ease infinite;
+}
+
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-thumb { background: #10b981; border-radius: 4px; }
