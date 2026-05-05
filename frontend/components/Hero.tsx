@@ -5,9 +5,12 @@ import { Zap, Leaf, BarChart3 } from "lucide-react";
 export default function Hero() {
   return (
     <section className="relative px-6 pt-20 pb-16 text-center max-w-5xl mx-auto">
-      <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }}
-        className="inline-flex items-center gap-2 glass px-4 py-1.5 mb-6 text-sm">
-        <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+            <motion.div
+        initial={{ scale: 0, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        className="inline-flex items-center gap-2 glass px-3 py-1 mb-3 text-xs text-secondary"
+      >
+        <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
         Sustainability Analytics for the LLM Era
       </motion.div>
       <motion.h1 initial={{ y: 30, opacity: 0 }} animate={{ y: 0, opacity: 1 }}
