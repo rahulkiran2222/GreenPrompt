@@ -1,9 +1,10 @@
 "use client";
 import { Canvas, useFrame } from "@react-three/fiber";
-import { useRef, useMemo } from "react";
+import { useRef, useMemo, useEffect, useState } from "react";
+import { useTheme } from "next-themes";
 import * as THREE from "three";
 
-function ParticleField() {
+function ParticleField({ color }: { color: string }) {
   const ref = useRef<THREE.Points>(null!);
   const positions = useMemo(() => {
     const arr = new Float32Array(2000 * 3);
@@ -21,19 +22,34 @@ function ParticleField() {
       <bufferGeometry>
         <bufferAttribute attach="attributes-position" args={[positions, 3]} />
       </bufferGeometry>
-      <pointsMaterial size={0.04} color="#10b981" transparent opacity={0.7} />
+      <pointsMaterial size={0.04} color={color} transparent opacity={0.7} />
     </points>
   );
 }
 
 export default function ThreeBackground() {
+  const { resolvedTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+  if (!mounted) return null;
+
+  const isDark = resolvedTheme === "dark";
+  const particleColor = isDark ? "#10b981" : "#059669";
+
   return (
     <div className="fixed inset-0 -z-10 pointer-events-none">
       <Canvas camera={{ position: [0, 0, 8] }}>
         <ambientLight intensity={0.4} />
-        <ParticleField />
+        <ParticleField color={particleColor} />
       </Canvas>
-      <div className="absolute inset-0 bg-gradient-to-br from-midnight via-slate-900 to-emerald-950/30 dark:opacity-100 light:opacity-0" />
+      <div
+        className="absolute inset-0"
+        style={{
+          background: isDark
+            ? "linear-gradient(135deg, #020617 0%, #0f172a 50%, rgba(6,78,59,0.3) 100%)"
+            : "linear-gradient(135deg, #f0fdf4 0%, #ecfdf5 50%, rgba(16,185,129,0.08) 100%)",
+        }}
+      />
     </div>
   );
 }
