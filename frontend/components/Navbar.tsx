@@ -2,6 +2,7 @@
 import { Leaf } from "lucide-react";
 import { motion } from "framer-motion";
 import ThemeToggle from "./ThemeToggle";
+import SettingsPanel from "./SettingsPanel";
 
 export default function Navbar() {
   return (
@@ -11,9 +12,9 @@ export default function Navbar() {
         <Leaf className="text-emerald-400 animate-pulse-glow rounded-full p-1" size={32} />
         <span className="text-xl font-bold gradient-text">GreenPrompt</span>
       </div>
-      <div className="flex items-center gap-4">
-        <a href="/whitepaper" className="text-sm hover:text-emerald-400 transition">Whitepaper</a>
-        <a href="https://github.com" className="text-sm hover:text-emerald-400 transition">GitHub</a>
+      <div className="flex items-center gap-2 sm:gap-4">
+        <a href="/whitepaper" className="text-sm hover:text-emerald-400 transition hidden sm:inline">Whitepaper</a>
+        <SettingsPanel />
         <ThemeToggle />
       </div>
     </motion.nav>
